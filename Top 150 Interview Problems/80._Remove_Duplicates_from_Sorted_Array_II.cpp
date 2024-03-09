@@ -10,26 +10,26 @@ class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
         bool twice = false;
-        int y = 1;
-        int z = 0;
+        int x = 1;
+        int y = 0;
 
-        for (int x = 1; x < nums.size(); x++){
-            if (nums[z] == nums[x] && !twice){
-                nums[y] = nums[x];
+        for (int i = 1; i < nums.size(); i++){
+            if (nums[y] == nums[i] && !twice){
+                nums[x++] = nums[i];
                 twice = true;
                 y++;
-                z++;
-            } else if (nums[z] == nums[x] && twice) {
+            } else if (nums[y] == nums[i] && twice) {
                 continue;
-            } else if (nums[z] != nums[x]) {
-                twice = false;
-                nums[y] = nums[x];
+            } else if (nums[y] != nums[i]) {
+                if (twice){
+                    twice = false;
+                }
+                nums[x++] = nums[i];
                 y++;
-                z++;
             }
         }
 
-        return y;
+        return x;
     }
 };
 
