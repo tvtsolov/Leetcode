@@ -15,7 +15,7 @@ public:
         {
             if(nums[i-1] != nums[i])
             {
-                nums[insertindex]=nums[i];
+                nums[insertindex] = nums[i];
                 insertindex++;
             }
         }
