@@ -1,42 +1,30 @@
 #include <vector>
 #include <algorithm>
 
+// optimal
+
 using namespace std;
 
 class Solution {
 public:
     bool canJump(vector<int>& nums) {
+        int maxIdx = nums[0];
 
+        for (int i = 0; i < nums.size(); ++i) {
+            if (maxIdx >= nums.size() - 1) return true;
 
-        int size = nums.size();
-        int lastPos = size-1;
-        if(size == 1) return true;
-        int biggestStep = INT_MIN;
-        int biggestStepInd = -1;
+            if (nums[i] == 0 && maxIdx == i) return false;
 
-        for(int i = 0; i < lastPos;){
+            if (i + nums[i] > maxIdx) maxIdx = i + nums[i];
+        }
 
-            if (nums[i] >= lastPos-i){
-                return true;
-            } 
-            for (int k = i+1; k <= nums[i]+i; k++){
-                
-                if (nums[k] != 0 && nums[k]+k > biggestStep){
-                    biggestStep = nums[k]+k;
-                    biggestStepInd = k;
-                } 
-            }
-            if (biggestStep == INT_MIN) return false;
-            i = biggestStepInd;
-            biggestStep = INT_MIN;
-        } 
-        return false;
+        return true;
     }
-};  
+};
 
 int main() {
     Solution s;
-    vector<int> vec {5,9,3,2,1,0,2,3,3,1,0,0};
+    vector<int> vec {1,1,1,1,0};
 
     int result = s.canJump(vec);
     
